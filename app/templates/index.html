@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Sapho Bio LinkedIn Growth Intelligence Dashboard"
+    >
+
+    <title>Sapho Bio | Growth Intelligence</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='/css/style.css') }}"
+    >
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="header-inner">
+            <div class="brand-block">
+                <div class="brand-mark">
+                    S
+                </div>
+
+                <div>
+                    <p class="eyebrow">
+                        SAPHO BIO
+                    </p>
+
+                    <h1>
+                        Growth Intelligence
+                    </h1>
+
+                    <p class="header-subtitle">
+                        LinkedIn content intelligence and
+                        AI-assisted engagement
+                    </p>
+                </div>
+            </div>
+
+            <div class="header-badge">
+                <span class="status-dot"></span>
+                Groq AI Connected
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero-section">
+            <div>
+                <p class="section-kicker">
+                    COMPOUNDING PHARMACY
+                </p>
+
+                <h2>
+                    LinkedIn Engagement Queue
+                </h2>
+
+                <p class="hero-copy">
+                    Monitor relevant industry voices,
+                    review their LinkedIn content,
+                    and generate thoughtful Sapho Bio
+                    responses with AI.
+                </p>
+            </div>
+        </section>
+
+        <section
+            class="stats-grid"
+            aria-label="Dashboard statistics"
+        >
+            <article class="stat-card">
+                <span class="stat-label">
+                    Influencers
+                </span>
+
+                <strong class="stat-value">
+                    {{ total_influencers }}
+                </strong>
+
+                <span class="stat-detail">
+                    Industry voices tracked
+                </span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">
+                    Posts
+                </span>
+
+                <strong class="stat-value">
+                    {{ total_posts }}
+                </strong>
+
+                <span class="stat-detail">
+                    Posts in the queue
+                </span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">
+                    AI Responses
+                </span>
+
+                <strong
+                    class="stat-value"
+                    id="response-count"
+                >
+                    {{ total_responses }}
+                </strong>
+
+                <span class="stat-detail">
+                    Responses generated
+                </span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-label">
+                    Logged Posted
+                </span>
+
+                <strong
+                    class="stat-value"
+                    id="posted-count"
+                >
+                    {{ posted_responses }}
+                </strong>
+
+                <span class="stat-detail">
+                    Engagements completed
+                </span>
+            </article>
+        </section>
+
+        <section class="toolbar">
+            <div class="toolbar-copy">
+                <h3>
+                    Post Queue
+                </h3>
+
+                <p>
+                    {{ total_posts }} relevant LinkedIn
+                    posts ready for review.
+                </p>
+            </div>
+
+            <div class="toolbar-controls">
+                <label
+                    class="search-box"
+                    for="post-search"
+                >
+                    <span class="search-icon">
+                        &#128269;
+                    </span>
+
+                    <input
+                        id="post-search"
+                        type="search"
+                        placeholder="Search posts or influencers..."
+                        autocomplete="off"
+                    >
+                </label>
+
+                <select
+                    id="status-filter"
+                    class="filter-select"
+                    aria-label="Filter by response status"
+                >
+                    <option value="all">
+                        All posts
+                    </option>
+
+                    <option value="no-response">
+                        Needs response
+                    </option>
+
+                    <option value="draft">
+                        Draft generated
+                    </option>
+
+                    <option value="posted">
+                        Logged posted
+                    </option>
+                </select>
+            </div>
+        </section>
+
+        <section
+            class="posts-grid"
+            id="posts-grid"
+        >
+            {% for post in posts %}
+
+            {% set latest_response =
+                (
+                    post.responses
+                    | sort(
+                        attribute='id',
+                        reverse=true
+                    )
+                    | first
+                )
+                if post.responses
+                else none
+            %}
+
+            <article
+                class="post-card"
+                id="post-card-{{ post.id }}"
+                data-post-id="{{ post.id }}"
+                data-search-text="{{ (
+                    (post.influencer.name if post.influencer else '')
+                    ~ ' '
+                    ~ (post.influencer.company if post.influencer else '')
+                    ~ ' '
+                    ~ post.post_text
+                ) | lower | e }}"
+                data-status="{% if latest_response %}{{ latest_response.status }}{% else %}no-response{% endif %}"
+            >
+                <div class="post-card-header">
+                    <div class="influencer-info">
+                        <div class="avatar">
+                            {% if post.influencer %}
+                                {{ post.influencer.name[0] }}
+                            {% else %}
+                                ?
+                            {% endif %}
+                        </div>
+
+                        <div class="influencer-copy">
+                            <div class="name-row">
+                                {% if post.influencer %}
+                                    <a
+                                        class="influencer-name"
+                                        href="{{ post.influencer.linkedin_url }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {{ post.influencer.name }}
+                                    </a>
+                                {% else %}
+                                    <span class="influencer-name">
+                                        Unknown Influencer
+                                    </span>
+                                {% endif %}
+
+                                <span class="linkedin-pill">
+                                    LinkedIn
+                                </span>
+                            </div>
+
+                            {% if post.influencer %}
+                                <p class="influencer-title">
+                                    {% if post.influencer.title %}
+                                        {{ post.influencer.title }}
+                                    {% endif %}
+
+                                    {% if
+                                        post.influencer.title
+                                        and post.influencer.company
+                                    %}
+                                        ·
+                                    {% endif %}
+
+                                    {% if post.influencer.company %}
+                                        {{ post.influencer.company }}
+                                    {% endif %}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <span class="post-number">
+                        #{{ post.id }}
+                    </span>
+                </div>
+
+                <div class="post-content">
+                    <p>
+                        {{ post.post_text }}
+                    </p>
+                </div>
+
+                <div class="post-meta">
+                    <span>
+                        Source: LinkedIn
+                    </span>
+
+                    <a
+                        href="{{ post.post_url }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="source-link"
+                    >
+                        View original post
+                        <span aria-hidden="true">
+                            &#8599;
+                        </span>
+                    </a>
+                </div>
+
+                <div class="response-section">
+                    <div class="response-heading">
+                        <div>
+                            <span class="response-label">
+                                SAPHO BIO RESPONSE
+                            </span>
+
+                            <span
+                                class="response-status {% if latest_response %}status-{{ latest_response.status }}{% else %}status-empty{% endif %}"
+                                id="response-status-{{ post.id }}"
+                            >
+                                {% if latest_response %}
+                                    {{ latest_response.status }}
+                                {% else %}
+                                    Not generated
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="response-box {% if not latest_response %}response-box-empty{% endif %}"
+                        id="response-box-{{ post.id }}"
+                    >
+                        {% if latest_response %}
+                            {{ latest_response.response_text }}
+                        {% else %}
+                            <span class="empty-response">
+                                Generate an AI-assisted
+                                LinkedIn response tailored
+                                to this post.
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div
+                        class="response-actions"
+                        id="response-actions-{{ post.id }}"
+                    >
+                        <button
+                            class="button button-primary generate-button"
+                            type="button"
+                            data-post-id="{{ post.id }}"
+                        >
+                            <span class="button-icon">
+                                &#10024;
+                            </span>
+
+                            {% if latest_response %}
+                                Regenerate Response
+                            {% else %}
+                                Generate Response
+                            {% endif %}
+                        </button>
+
+                        <button
+                            class="button button-secondary copy-button"
+                            type="button"
+                            data-post-id="{{ post.id }}"
+                            {% if not latest_response %}
+                                disabled
+                            {% endif %}
+                        >
+                            Copy
+                        </button>
+
+                        <button
+                            class="button button-secondary linkedin-button"
+                            type="button"
+                            data-post-id="{{ post.id }}"
+                            data-post-url="{{ post.post_url }}"
+                            {% if not latest_response %}
+                                disabled
+                            {% endif %}
+                        >
+                            Copy + Open LinkedIn
+                        </button>
+
+                        <button
+                            class="button button-success posted-button"
+                            type="button"
+                            data-post-id="{{ post.id }}"
+                            data-response-id="{% if latest_response %}{{ latest_response.id }}{% endif %}"
+                            {% if
+                                not latest_response
+                                or latest_response.status == 'posted'
+                            %}
+                                disabled
+                            {% endif %}
+                        >
+                            {% if
+                                latest_response
+                                and latest_response.status == 'posted'
+                            %}
+                                Posted ✓
+                            {% else %}
+                                Mark Posted
+                            {% endif %}
+                        </button>
+                    </div>
+
+                    <p
+                        class="action-message"
+                        id="action-message-{{ post.id }}"
+                        aria-live="polite"
+                    ></p>
+                </div>
+            </article>
+
+            {% endfor %}
+        </section>
+
+        <div
+            class="empty-state"
+            id="empty-state"
+            hidden
+        >
+            <h3>
+                No posts found
+            </h3>
+
+            <p>
+                Try changing your search or status filter.
+            </p>
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div>
+            <strong>
+                Sapho Bio Growth Intelligence
+            </strong>
+
+            <span>
+                MVP · Compounding Pharmacy
+                LinkedIn Intelligence
+            </span>
+        </div>
+
+        <p>
+            AI-assisted responses require human review
+            before publication.
+        </p>
+    </footer>
+
+    <script
+        src="{{ url_for('static', path='/js/app.js') }}"
+        defer
+    ></script>
+</body>
+</html>

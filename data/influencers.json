@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Shawn Hodges, PharmD",
+    "title": "Chief Executive Officer",
+    "company": "Revelation Pharma Corporation",
+    "linkedin_url": "https://www.linkedin.com/in/shawn-hodges-pharmd-a96a249",
+    "relevance_reason": "CEO and active thought leader in the compounding pharmacy industry, frequently discussing FDA regulation, pharmacy quality, peptides, patient access, and the future of personalized medicine."
+  },
+  {
+    "id": 2,
+    "name": "Rick Niemi",
+    "title": "Chief Executive Officer",
+    "company": "Valor Compounding Pharmacy",
+    "linkedin_url": "https://www.linkedin.com/in/rickniemi1",
+    "relevance_reason": "Long-time compounding pharmacy executive and industry voice with more than 30 years of experience, sharing perspectives on compounding quality, pharmacy operations, technology, and patient care."
+  },
+  {
+    "id": 3,
+    "name": "Gus Bassani, PharmD",
+    "title": "Chief Executive Officer",
+    "company": "PCCA",
+    "linkedin_url": "https://www.linkedin.com/in/gus-bassani",
+    "relevance_reason": "Long-time pharmacy compounding executive and scientific leader at PCCA, one of the industry's major organizations supporting compounding pharmacies, personalized medicine, education, quality, and innovation."
+  },
+  {
+    "id": 4,
+    "name": "Scott Brunner, CAE",
+    "title": "Chief Executive Officer",
+    "company": "Alliance for Pharmacy Compounding",
+    "linkedin_url": "https://www.linkedin.com/in/rscottbrunner",
+    "relevance_reason": "CEO of the Alliance for Pharmacy Compounding and a highly active industry voice on FDA policy, compounding regulation, patient access, peptides, safety, and advocacy."
+  },
+  {
+    "id": 5,
+    "name": "Tenille Davis, PharmD, RPh, BCSCP, FAPC",
+    "title": "Chief Advocacy Officer",
+    "company": "Alliance for Pharmacy Compounding",
+    "linkedin_url": "https://www.linkedin.com/in/tenille-davis-547369164",
+    "relevance_reason": "Compounding pharmacist and national advocacy leader focused on pharmacy compounding regulation, compliance, education, patient access, and industry policy."
+  },
+  {
+    "id": 6,
+    "name": "Shaun Noorian",
+    "title": "Founder & Chief Executive Officer",
+    "company": "Empower Pharmacy",
+    "linkedin_url": "https://www.linkedin.com/in/shaunnoorian",
+    "relevance_reason": "Founder and CEO of Empower Pharmacy, a major national compounding organization operating both 503A pharmacy and 503B outsourcing operations, with a focus on personalized medicine, scale, technology, quality, and patient access."
+  },
+  {
+    "id": 7,
+    "name": "Pat Stephens, PharmD, CQA",
+    "title": "Compounding Quality & Compliance Consultant",
+    "company": "Stephens GMP Consulting",
+    "linkedin_url": "https://www.linkedin.com/in/pat-stephens-pharmd",
+    "relevance_reason": "Active compounding quality and compliance expert focused on 503A and 503B operations, USP 797, cGMP, sterile compounding, inspections, accreditation, sterility assurance, and FDA regulatory expectations."
+  },
+  {
+    "id": 8,
+    "name": "Dawn Ipsen, PharmD",
+    "title": "Compounding Pharmacist, Pharmacy Owner & APC Board Member",
+    "company": "Kusler's Compounding Pharmacy",
+    "linkedin_url": "https://www.linkedin.com/in/dawn-ipsen-pharmd-124a658",
+    "relevance_reason": "Active compounding pharmacy leader, Alliance for Pharmacy Compounding Fellow and board member who regularly discusses pharmacy ownership, customized medications, patient access, industry collaboration, and the future of compounding."
+  },
+  {
+    "id": 9,
+    "name": "Megan Benney Kilkeary, PharmD",
+    "title": "Compounding Pharmacy Professional",
+    "company": "Alliance for Pharmacy Compounding",
+    "linkedin_url": "https://www.linkedin.com/in/megan-benney-kilkeary-pharmd-0522798a",
+    "relevance_reason": "Compounding pharmacy professional with extensive industry experience who actively discusses personalized medicine, women's health, hormone therapy, patient education, and the evolution of compounding pharmacy."
+  },
+  {
+    "id": 10,
+    "name": "Kevin Hansen, PharmD, MS, BCSCP",
+    "title": "503B & Sterile Compounding Quality Leader",
+    "company": "Premier Inc.",
+    "linkedin_url": "https://www.linkedin.com/in/khansenrx",
+    "relevance_reason": "Active pharmacy leader focused on 503B outsourcing facilities, sterile compounding, FDA regulation, quality management, drug shortages, operational strategy, and healthcare supply chains."
+  }
+]
